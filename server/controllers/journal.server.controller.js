@@ -52,9 +52,9 @@ exports.delete = function(req, res) {
 exports.update = function(req, res) {
     console.log(req.params.journalId);
     let journal = {
-        yesterday: req.body.yesterday,
-        today: req.body.today,
-        impediment: req.body.impediment
+        title: req.body.title,
+        entry: req.body.entry,
+        category: req.body.category
     }
 
     Journal.findByIdAndUpdate(req.params.journalId, journal, function(err, data) {

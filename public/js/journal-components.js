@@ -179,6 +179,7 @@ class JournalEditBox extends React.Component {
             },
             data: journal
         }).done((data, status, xhr) => {
+          console.log("Successfully edited");
             this.setState({
                 done: true
             });
