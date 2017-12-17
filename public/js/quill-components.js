@@ -51,6 +51,8 @@ class QuillBox extends React.Component {
             );
         }
 
+        console.log("render called");
+
         return (
 
           <div>
@@ -129,9 +131,10 @@ class QuillBox extends React.Component {
             headers: {
                 "Authorization": sessionStorage.getItem("token")
             }
-        }).done((journal, status, xhr) => {
-             this.setState({ journal });
-            console.log(journal);
+        }).done((journals, status, xhr) => {
+             this.setState({ journals });
+            console.log(journals);
+            this.forceUpdate();
         }).fail((xhr) => {
             console.log(xhr.status);
         });
