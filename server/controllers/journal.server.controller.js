@@ -67,13 +67,18 @@ exports.update = function(req, res) {
 }
 
 exports.filter = function(req, res) {
+    console.log("Filtering");
     console.log(req.params.category);
-    var query = { category: req.params.category };
-    Journal.find(query).toArray(function(err, result) {
+    var query = {category: req.params.category};
+    console.log({_category: req.params.category} + query);
+    Journal.find(query, function(err, result) {
+        console.log("Finding");
+        console.log(result);
         if(!err) {
-            res.status(204).send();
+            console.log("Result" + result);
+            res.status(204).send(result);
         } else {
-            console.log(result);
+
             res.status(500).send();
         }
     });
