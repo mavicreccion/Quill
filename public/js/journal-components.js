@@ -216,45 +216,70 @@ class JournalNewBox extends React.Component {
         }
 
         return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-sm"></div>
-                <div className="col-sm" id="col-sm-meeting">
-                            <form onSubmit={this._handleSubmit.bind(this)}>
-                                <div className="modal-body">
-                                    <div className="form-group">
-                                        <label htmlFor="title">Title</label>
-                                        <input type="text" ref={(input) => this._title = input} className="form-control" id="title" />
-                                    </div>
 
-                                    <div className="form-group">
-                                        <label htmlFor="entry">Entry</label>
-                                        <textarea ref={(textarea) => this._entry = textarea} className="form-control" id="entry" rows="3"></textarea>
-                                    </div>
+          <div>
+            <nav className="navbar navbar-expand-md navbar-dark fixed-top">
+              <a className="navbar-brand" href="#">Quill</a>
+              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+              </button>
+              <div className="collapse navbar-collapse" id="navbarCollapse">
+                <ul className="navbar-nav ml-auto">
+                  <li className="nav-item active">
+                    <a className="nav-link" href="#">Journal <span className="sr-only">(current)</span></a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="#">Gaius Ambion</a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
 
-                                    <div className="form-group">
-                                      <label htmlFor="category">Category</label>
-                                      <select className="form-control " id="category" name="category"
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-sm"></div>
+                    <div className="col-sm" id="col-sm-meeting">
+                        <form onSubmit={this._handleSubmit.bind(this)}>
+                            <div className="modal-body">
+                                <div className="form-group">
+                                    <label htmlFor="title">Title</label>
+                                    <input type="text" ref={(input) => this._title = input}
+                                        className="form-control" id="title" />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="entry">Entry</label>
+                                    <textarea ref={(textarea) => this._entry = textarea}
+                                        className="form-control" id="entry" rows="3"></textarea>
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="category">Category</label>
+                                    <select className="form-control " id="category" name="category"
                                         ref={(select) => this._category = select}>
-                                          <option value="Thoughts">Thoughts</option>
-                                          <option value="Travel">Travel</option>
-                                          <option value="School">School</option>
-                                          <option value="Love">Love</option>
-                                          <option value="Friends">Friends</option>
-                                          <option value="Notes">Notes</option>
-                                          <option value="Others">Others</option>
-                                      </select>
-                                  </div>
+                                              <option value="Thoughts">Thoughts</option>
+                                              <option value="Travel">Travel</option>
+                                              <option value="School">School</option>
+                                              <option value="Love">Love</option>
+                                              <option value="Friends">Friends</option>
+                                              <option value="Notes">Notes</option>
+                                              <option value="Others">Others</option>
+                                    </select>
                                 </div>
-                                <div className="modal-footer">
-                                    <button type="button" onClick={this._handleClose.bind(this)} className="btn btn-secondary" data-dismiss="modal">Close</button>
+                              </div>
+                              <div className="modal-footer">
+                                  <button type="button" onClick={this._handleClose.bind(this)}
+                                      className="btn btn-secondary" data-dismiss="modal">Close</button>
                                     <input type="submit" className="btn btn-primary" />
-                                </div>
-                            </form>
+                            </div>
+                        </form>
+                    </div>
+                    <div className="col-sm"></div>
                 </div>
-                <div className="col-sm"></div>
             </div>
-        </div>
+
+          </div>
         );
     }
 
