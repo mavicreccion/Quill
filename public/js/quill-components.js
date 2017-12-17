@@ -61,12 +61,8 @@ class QuillBox extends React.Component {
 
                 </div>
             </div>
-        <div className="row">
-            <div className="col-sm">
-                <div className="card-deck">
-                    <JournalList journals={this.state.journals} />
-                </div>
-            </div>
+        <div className="container">
+            <JournalList journals={this.state.journals} />
         </div>
 </div>
         );
@@ -129,7 +125,7 @@ class JournalCard extends React.Component {
         }
 
         return(
-                    <div className="card">
+                    <div className="card mb-4">
                         <div className="card-body">
                             <h4 className="card-title">{this.props.title}</h4>
                             <h6 className="card-subtitle mb-2 text-muted">Entry</h6>
