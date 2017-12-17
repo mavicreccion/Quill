@@ -8,7 +8,7 @@ class LoginBox extends React.Component {
             redirect: false
         }
     }
-    
+
     render() {
 
         if(this.state.redirect) {
@@ -72,7 +72,7 @@ class LoginBox extends React.Component {
         });
 
         let loginAlert = $(".alert-login");
-        
+
         if(loginAlert.hasClass("invisible")) {
             loginAlert.removeClass("invisible");
         }

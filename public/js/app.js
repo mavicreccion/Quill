@@ -37,9 +37,9 @@ class AppBox extends React.Component {
                 <Route exact path="/" component={QuillBox} />
             </div>
                     <hr />
-              <footer class="footer">
-                <div class="container">
-                  <span class="text-muted">Copyright Quill 2017. All Rights Reserved.</span>
+              <footer className="footer">
+                <div className="container">
+                  <span className="text-muted">Copyright Quill 2017. All Rights Reserved.</span>
                 </div>
               </footer>
             </div>
