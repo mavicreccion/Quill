@@ -3,7 +3,7 @@ let bcrypt = require("bcrypt");
 let User = require("../models/user.server.model.js");
 
 var admin = new User({
-  name: "admin",
+  name: "admin@test.com",
   password: "123"
 });
 

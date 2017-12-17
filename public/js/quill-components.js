@@ -52,19 +52,19 @@ class QuillBox extends React.Component {
         }
 
         return (
+          <div>
             <div className="container-fluid">
-            <div className="row">
-                <div className="col-sm">
-                <button type="button" onClick={this._handleClick.bind(this)} className="btn btn-primary float-right">
-                    +New
-                </button>
+                <div className="btn-group">
+                    <button type="button" id = "addEntry" onClick={this._handleClick.bind(this)} className="btn btn-warning btn-fab pmd-btn-fab pmd-btn-raised ">
+                        <i className="fa fa-plus"></i>
+                    </button>
+                </div>
 
+                <div className="container">
+                  <JournalList journals={this.state.journals} />
                 </div>
             </div>
-        <div className="container">
-            <JournalList journals={this.state.journals} />
-        </div>
-</div>
+          </div>
         );
     }
 
@@ -126,12 +126,11 @@ class JournalCard extends React.Component {
 
         return(
                     <div className="card mb-4">
+                        <h4 className="card-header mt-0">{this.props.title}
+                          <h6 className="card-text mb-1 mt-2">{this.props.category}</h6>
+                        </h4>
                         <div className="card-body">
-                            <h4 className="card-title">{this.props.title}</h4>
-                            <h6 className="card-subtitle mb-2 text-muted">Entry</h6>
                             <p className="card-text">{this.props.entry}</p>
-                            <h6 className="card-subtitle mb-2 text-muted">Category</h6>
-                            <p className="card-text">{this.props.category}</p>
                             <ManageButton journalId={this.props.journalId} action={this._handleEdit.bind(this)} text="Edit" />
                             <ManageButton journalId={this.props.journalId} action={this._handleDelete.bind(this)} text="Delete" />
                         </div>
@@ -164,24 +163,25 @@ class JournalCard extends React.Component {
             console.log(xhr.status);
         });
     }
-
 }
 
 class ManageButton extends React.Component {
-
     constructor() {
         super();
     }
-
     render() {
+      if(this.props.text == "Edit"){
         return (
-            <a href="#" onClick={this._handleEdit.bind(this)} className="card-link">{this.props.text}</a>
+            <a href="#" onClick={this._handleEdit.bind(this)} className="card-link"><i className="fa fa-pencil-square-o"></i></a>
         );
+      }else{
+        return (
+            <a href="#" onClick={this._handleEdit.bind(this)} className="card-link"><i className="fa fa-trash"></i></a>
+        );
+      }
     }
-
     _handleEdit(e) {
         e.preventDefault();
         this.props.action(this.props.journalId);
     }
-
 }

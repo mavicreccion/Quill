@@ -18,47 +18,56 @@ class LoginBox extends React.Component {
         }
 
         return (
-
           <div>
-            <nav className="navbar navbar-expand-md navbar-dark fixed-top">
-              <a className="navbar-brand" href="#">Quill</a>
-              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-              </button>
-              <div className="collapse navbar-collapse" id="navbarCollapse">
-                <ul className="navbar-nav ml-auto">
-                  <li className="nav-item active">
-                    <a className="nav-link" href="#">Login <span className="sr-only">(current)</span></a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="#">Register</a>
-                  </li>
-                </ul>
-              </div>
-            </nav>
-
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-sm"></div>
-                    <div className="col-sm" id="col-sm-login">
-                <div className="alert-login alert alert-danger invisible" role="alert">
-                    {this.state.message}
+            <header>
+              <nav className="navbar navbar-expand-md navbar-dark fixed-top">
+                <a className="navbar-brand" href="#">Quill</a>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                  aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                  <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarCollapse">
+                  <ul className="navbar-nav ml-auto">
+                    <li className="nav-item active">
+                      <a className="nav-link" href="#">Login <span className="sr-only">(current)</span></a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" href="#">Register</a>
+                    </li>
+                  </ul>
                 </div>
+              </nav>
+            </header>
+            <div className="container">
+              <div className="row">
+                <div className="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12">
+                  <div className="card border-none">
+                    <div className="card-body">
+                      <div className="mt-2 text-center">
+                        <h2>Login Your Account</h2>
+                      </div>
+                      <p className="mt-4 text-black lead text-center">
+                        Ready to continue your journey?
+                      </p>
+                      <div className="mx-4" id="col-sm-login">
+                        <div className="alert-login alert alert-danger invisible" role="alert">
+                            {this.state.message}
+                        </div>
                         <form onSubmit={this._handleSubmit.bind(this)}>
-                            <div className="form-group">
-                                <label htmlFor="name">User ID</label>
-                                <input type="text" ref={(input) => this._name = input} className="form-control" id="name" placeholder="Enter user ID" />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="password">Password</label>
-                                <input type="password" ref={(input) => this._password = input} className="form-control" id="password" placeholder="Password" />
-                            </div>
-                            <button type="submit" className="btn btn-primary">Submit</button>
-                </form>
+                          <div className="form-group">
+                            <input type="email" className="form-control" ref={(input) => this._name = input} name="name"  placeholder="Enter email address"/>
+                          </div>
+                          <div className="form-group">
+                            <input type="password" className="form-control" name="password" ref={(input) => this._password = input} placeholder="Enter password"/>
+                          </div>
+                          <hr></hr>
+                          <button type="submit" className="btn btn-primary btn-block mt-3">Create Account</button>
+                        </form>
+                      </div>
                     </div>
-                    <div className="col-sm"></div>
+                  </div>
                 </div>
+              </div>
             </div>
           </div>
         );

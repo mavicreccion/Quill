@@ -59,12 +59,14 @@ a:hover{
   width: 225px;
 }
 
-
+.thoughtHeader{
+  background-color: #e8bf96
+}
 .card-header{
     background-color: #F19F4E
 }
 
-
+.card-text .mb-2 .bg-light
 
 .shadowed
 {
