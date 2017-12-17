@@ -54,7 +54,7 @@ class QuillBox extends React.Component {
         return (
           <div>
             <div className="container-fluid">
-                <div className="btn-group">
+                <div className="btn-group mb-3">
                     <button type="button" id = "addEntry" onClick={this._handleClick.bind(this)} className="btn btn-warning btn-fab pmd-btn-fab pmd-btn-raised ">
                         <i className="fa fa-plus"></i>
                     </button>
