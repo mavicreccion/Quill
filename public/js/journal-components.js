@@ -45,16 +45,21 @@ class JournalEditBox extends React.Component {
                                 <div className="modal-body">
                                     <div className="form-group">
                                         <label htmlFor="title">Title</label>
-                                        <input type="text" value={this.state.journal.title} ref={(input) => this._title = input} className="form-control" id="title" />
+                                        <input type="text" onChange={this._handleTitleChange.bind(this)}
+                                          value={this.state.journal.title} ref={(input) => this._title = input}
+                                            className="form-control" id="title" />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="entry">Entry</label>
-                                        <textarea value={this.state.journal.entry} ref={(textarea) => this._entry = textarea} className="form-control" id="entry" rows="3"></textarea>
+                                        <textarea onChange={this._handleEntryChange.bind(this)}
+                                          value={this.state.journal.entry} ref={(textarea) => this._entry = textarea}
+                                            className="form-control" id="entry" rows="3"></textarea>
                                     </div>
 
                                     <div className="form-group">
                                       <label htmlFor="category">Category</label>
-                                      <select className="form-control " id="category" name="category" value={this.state.journal.category}
+                                      <select className="form-control " id="category" name="category"
+                                        onChange={this._handleCategoryChange.bind(this)} value={this.state.journal.category}
                                         ref={(select) => this._category = select}>
                                           <option value="Thoughts">Thoughts</option>
                                           <option value="Travel">Travel</option>
