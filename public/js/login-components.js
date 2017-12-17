@@ -80,7 +80,17 @@ class LoginBox extends React.Component {
             name: this._name.value,
             password: this._password.value
         }
-
+        var currUser;
+        $.ajax({
+            type: "GET",
+            url: `/api/getUser/${this._name.value}`
+        }).done((user, status, xhr) => {
+            console.log(user);
+            currUser = user;
+        }).fail((xhr) => {
+            console.log(xhr.status);
+        });
+        console.log(currUser._id);
         $.ajax({
             type: "POST",
             url: "/api/session",
