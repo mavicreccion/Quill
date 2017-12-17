@@ -140,7 +140,7 @@ class JournalEditBox extends React.Component {
     _fetchJournal(journalId) {
         $.ajax({
             type: "GET",
-            url: `/api/journal/${journalId}`,
+            url: `/api/getJournal/${journalId}`,
             headers: {
                 "Authorization": sessionStorage.getItem("token")
             }
