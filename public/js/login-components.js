@@ -78,6 +78,7 @@ class LoginBox extends React.Component {
         }).done((user, status, xhr) => {
             console.log(user[0]._id);
             sessionStorage.setItem("userId", user[0]._id);
+            sessionStorage.setItem("name", user[0].name);
         }).fail((xhr) => {
             console.log(xhr.status);
         });

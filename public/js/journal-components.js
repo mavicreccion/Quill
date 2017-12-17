@@ -51,7 +51,7 @@ class JournalEditBox extends React.Component {
                     <a className="nav-link" href="#">Journal <span className="sr-only">(current)</span></a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">Gaius Ambion</a>
+                    <a className="nav-link" href="#">{sessionStorage.getItem("name")}</a>
                   </li>
                 </ul>
               </div>
@@ -257,7 +257,7 @@ class JournalNewBox extends React.Component {
                     <a className="nav-link" href="#">Journal <span className="sr-only">(current)</span></a>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">Gaius Ambion</a>
+                    <a className="nav-link" href="#">{sessionStorage.getItem("name")}</a>
                   </li>
                 </ul>
               </div>
