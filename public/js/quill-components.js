@@ -74,7 +74,7 @@ class QuillBox extends React.Component {
 
             <div className="container-fluid">
                 <div className="container w-75 mx-auto">
-                    <form onSubmit={this._handleSubmitFilter.bind(this)}>
+                    <form>
                         <div className="form-row mt-5">
                             <label className="col-md-2 col-sm-2" htmlFor="filter_category">Filter By:</label>
                             <select className="form-control col-md-2 col-sm-2" id="filter_category"
@@ -87,6 +87,8 @@ class QuillBox extends React.Component {
                                 <option value="Notes">Notes</option>
                                 <option value="Others">Others</option>
                             </select>
+                            <button type="submit" onClick={this._handleSubmitFilter.bind(this)}
+                                className="btn btn-primary">Filter</button>
                         </div>
                     </form>
                   </div>
