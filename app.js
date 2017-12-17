@@ -16,7 +16,7 @@ app.use("*", function(req, res) {
 });
 
 //db init
-mongoose.connect("mongodb://localhost/scrumie", {
+mongoose.connect("mongodb://localhost/quill", {
     useMongoClient: true
 });
 

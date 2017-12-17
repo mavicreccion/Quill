@@ -1,10 +1,10 @@
-const Meeting = require("../models/meeting.server.model.js");
+const Journal = require("../models/journal.server.model.js");
 
 exports.getAll = function(req, res) {
 
-    Meeting.findAll()
-        .then((meetings) => {
-            return res.status(200).json(meetings);
+    Journal.findAll()
+        .then((journals) => {
+            return res.status(200).json(journals);
         })
         .catch((error) => {
             console.log(error);
@@ -14,20 +14,20 @@ exports.getAll = function(req, res) {
 
 exports.getById = function(req, res) {
 
-    Meeting.findById(req.params.meetingId, function(err, meeting) {
+    Journal.findById(req.params.journalId, function(err, journal) {
         if(err) {
             console.log(err);
             return res.status(500).send();
         } else {
-            return res.status(200).send(meeting);
+            return res.status(200).send(journal);
         }
     });
 }
 
 exports.create = function(req, res) {
-    let meeting = new Meeting(req.body);
+    let journal = new Journal(req.body);
 
-    meeting.save((err, meeting) => {
+    journal.save((err, journal) => {
         if(err) {
             console.log(err);
             return res.status(500).send();
@@ -38,9 +38,9 @@ exports.create = function(req, res) {
 }
 
 exports.delete = function(req, res) {
-    console.log(req.params.meetingId);
+    console.log(req.params.journalId);
 
-    Meeting.findByIdAndRemove(req.params.meetingId, function(err, data) {
+    Journal.findByIdAndRemove(req.params.journalId, function(err, data) {
         if(!err) {
             res.status(204).send();
         } else {
@@ -50,14 +50,14 @@ exports.delete = function(req, res) {
 }
 
 exports.update = function(req, res) {
-    console.log(req.params.meetingId);
-    let meeting = {
+    console.log(req.params.journalId);
+    let journal = {
         yesterday: req.body.yesterday,
         today: req.body.today,
         impediment: req.body.impediment
     }
 
-    Meeting.findByIdAndUpdate(req.params.meetingId, meeting, function(err, data) {
+    Journal.findByIdAndUpdate(req.params.journalId, journal, function(err, data) {
         if(!err) {
             res.status(204).send();
         } else {
