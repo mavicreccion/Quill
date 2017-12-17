@@ -65,3 +65,17 @@ exports.update = function(req, res) {
         }
     })
 }
+
+exports.filter = function(req, res) {
+    console.log(req.params.category);
+    var query = { category: req.params.category };
+    Journal.find(query).toArray(function(err, result) {
+        if(!err) {
+            res.status(204).send();
+        } else {
+            console.log(result);
+            res.status(500).send();
+        }
+    });
+    })
+}

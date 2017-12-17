@@ -123,6 +123,18 @@ class QuillBox extends React.Component {
     _handleSubmitFilter(e) {
       e.preventDefault();
       console.log("FILTER " + this._category.value);
+        $.ajax({
+            type: "GET",
+            url: `/api/journal/${category}`,
+            headers: {
+                "Authorization": sessionStorage.getItem("token")
+            }
+        }).done((journal, status, xhr) => {
+             this.setState({ journals });
+            console.log(journals);
+        }).fail((xhr) => {
+            console.log(xhr.status);
+        });
     }
 }
 
