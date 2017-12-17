@@ -73,6 +73,23 @@ class QuillBox extends React.Component {
             </nav>
 
             <div className="container-fluid">
+                <div className="container w-75 mx-auto">
+                    <form onSubmit={this._handleSubmitFilter.bind(this)}>
+                        <div className="form-row mt-5">
+                            <label className="col-md-2 col-sm-2" htmlFor="filter_category">Filter By:</label>
+                            <select className="form-control col-md-2 col-sm-2" id="filter_category"
+                              ref={(select) => this._category = select} name="filter_category">
+                                <option value="Thoughts">Thoughts</option>
+                                <option value="Travel">Travel</option>
+                                <option value="School">School</option>
+                                <option value="Love">Love</option>
+                                <option value="Friends">Friends</option>
+                                <option value="Notes">Notes</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </div>
+                    </form>
+                  </div>
                 <div className="row">
                     <div className="col-sm">
                     <button type="button" onClick={this._handleClick.bind(this)} className="btn btn-primary float-right">
@@ -99,6 +116,11 @@ class QuillBox extends React.Component {
         this.setState({
             editMode: true
         });
+    }
+
+    _handleSubmitFilter(e) {
+      e.preventDefault();
+      console.log("FILTER " + this._category.value);
     }
 }
 
