@@ -59,7 +59,25 @@ class QuillBox extends React.Component {
                         <i className="fa fa-plus"></i>
                     </button>
                 </div>
-
+                <div className="container">
+                <form>
+                      <div className="form-row mt-5">
+                          <label className="col-md-2 col-sm-2" htmlFor="filter_category">Filter By:</label>
+                          <select className="form-control col-md-2 col-sm-2" id="filter_category"
+                            ref={(select) => this._category = select} name="filter_category">
+                              <option value="Thoughts">Thoughts</option>
+                              <option value="Travel">Travel</option>
+                              <option value="School">School</option>
+                              <option value="Love">Love</option>
+                              <option value="Friends">Friends</option>
+                              <option value="Notes">Notes</option>
+                              <option value="Others">Others</option>
+                          </select>
+                          <button type="submit" onClick={this._handleSubmitFilter.bind(this)}
+                              className="btn btn-primary">Filter</button>
+                      </div>
+                  </form>
+                </div>
                 <div className="container">
                   <JournalList journals={this.state.journals} />
                 </div>
@@ -73,6 +91,24 @@ class QuillBox extends React.Component {
 
         this.setState({
             editMode: true
+        });
+    }
+
+    _handleSubmitFilter(e) {
+      e.preventDefault();
+      console.log("FILTER " + this._category.value);
+        $.ajax({
+            type: "GET",
+            url: `/api/filterJournal/${this._category.value}`,
+            headers: {
+                "Authorization": sessionStorage.getItem("token")
+            }
+        }).done((journals, status, xhr) => {
+             this.setState({ journals });
+            console.log(journals);
+            this.forceUpdate();
+        }).fail((xhr) => {
+            console.log(xhr.status);
         });
     }
 }

@@ -52,9 +52,9 @@ exports.delete = function(req, res) {
 exports.update = function(req, res) {
     console.log(req.params.journalId);
     let journal = {
-        yesterday: req.body.yesterday,
-        today: req.body.today,
-        impediment: req.body.impediment
+        title: req.body.title,
+        entry: req.body.entry,
+        category: req.body.category
     }
 
     Journal.findByIdAndUpdate(req.params.journalId, journal, function(err, data) {
@@ -64,4 +64,21 @@ exports.update = function(req, res) {
             res.status(500).send();
         }
     })
+}
+
+exports.filter = function(req, res) {
+    console.log("Filtering");
+    console.log(req.params.category);
+    var query = {category: req.params.category};
+    console.log({_category: req.params.category} + query);
+    Journal.find(query, function(err, result) {
+        console.log("Finding");
+        console.log(result);
+        if(err) {
+            console.log(err);
+            return res.status(500).send();
+        } else {
+            return res.status(200).send(result);
+        }
+    });
 }
