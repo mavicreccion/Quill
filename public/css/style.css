@@ -87,3 +87,7 @@ a:hover{
     height:50px;
     border-radius: 50%;
 }
+
+#content {
+  padding-top: 100px;
+}
