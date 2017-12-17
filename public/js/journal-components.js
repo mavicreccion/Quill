@@ -1,19 +1,19 @@
-class MeetingEditBox extends React.Component {
+class JournalEditBox extends React.Component {
 
     constructor() {
         super();
 
         this.state = {
-            meeting: {},
+            journal: {},
             auth: true,
             done: false
         }
     }
 
     componentWillMount() {
-        let meetingId = this.props.match.params.meetingId;
+        let journalId = this.props.match.params.journalId;
 
-        this._fetchMeeting(meetingId);
+        this._fetchJournal(journalId);
 
         if(!sessionStorage.getItem("token")) {
             this.setState({
@@ -23,7 +23,7 @@ class MeetingEditBox extends React.Component {
     }
 
     render() {
-        
+
         if(!this.state.auth) {
             return (
                 <Redirect to="/session/new" />
@@ -44,17 +44,28 @@ class MeetingEditBox extends React.Component {
                             <form onSubmit={this._handleSubmit.bind(this)}>
                                 <div className="modal-body">
                                     <div className="form-group">
-                                        <label htmlFor="yesterday">Yesterday</label>
-                                        <textarea onChange={this._handleYesterdayChange.bind(this)} value={this.state.meeting.yesterday} ref={(textarea) => this._yesterday = textarea} className="form-control" id="yesterday" rows="3"></textarea>
+                                        <label htmlFor="title">Title</label>
+                                        <input type="text" value={this.state.journal.title} ref={(input) => this._title = input} className="form-control" id="title" />
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="today">Today</label>
-                                        <textarea onChange={this._handleTodayChange.bind(this)} value={this.state.meeting.today} ref={(textarea) => this._today = textarea} className="form-control" id="today" rows="3"></textarea>
+                                        <label htmlFor="entry">Entry</label>
+                                        <textarea value={this.state.journal.entry} ref={(textarea) => this._entry = textarea} className="form-control" id="entry" rows="3"></textarea>
                                     </div>
+
                                     <div className="form-group">
-                                        <label htmlFor="impediment">Impediment</label>
-                                        <textarea onChange={this._handleImpedimentChange.bind(this)} value={this.state.meeting.impediment} ref={(textarea) => this._impediment = textarea} className="form-control" id="impediment" rows="3"></textarea>
-                                    </div>
+                                      <label htmlFor="category">Category</label>
+                                      <select className="form-control " id="category" name="category" value={this.state.journal.category}
+                                        ref={(select) => this._category = select}>
+                                          <option value="Thoughts">Thoughts</option>
+                                          <option value="Travel">Travel</option>
+                                          <option value="School">School</option>
+                                          <option value="Love">Love</option>
+                                          <option value="Friends">Friends</option>
+                                          <option value="Notes">Notes</option>
+                                          <option value="Others">Others</option>
+                                      </select>
+                                  </div>
+
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" onClick={this._handleClose.bind(this)} className="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -68,50 +79,50 @@ class MeetingEditBox extends React.Component {
         );
     }
 
-    _handleYesterdayChange(e) {
-        let meeting = this.state.meeting;
+    _handleTitleChange(e) {
+        let journal = this.state.journal;
 
         this.setState({
-            meeting: Object.assign({}, meeting, 
-                { 
-                    yesterday: e.target.value
+            journal: Object.assign({}, journal,
+                {
+                    title: e.target.value
                 })
         });
     }
 
-    _handleTodayChange(e) {
-        let meeting = this.state.meeting;
+    _handleEntryChange(e) {
+        let journal = this.state.journal;
 
         this.setState({
-            meeting: Object.assign({}, meeting, 
-                { 
-                    today: e.target.value
+            journal: Object.assign({}, journal,
+                {
+                    entry: e.target.value
                 })
         });
     }
 
-    _handleImpedimentChange(e) {
-        let meeting = this.state.meeting;
+    _handleCategoryChange(e) {
+        let journal = this.state.journal;
 
         this.setState({
-            meeting: Object.assign({}, meeting, 
-                { 
-                    impediment: e.target.value
+            journal: Object.assign({}, journal,
+                {
+                    category: e.target.value
                 })
         });
     }
 
-    _fetchMeeting(meetingId) {
+    _fetchJournal(journalId) {
         $.ajax({
             type: "GET",
-            url: `/api/meeting/${meetingId}`,
+            url: `/api/journal/${journalId}`,
             headers: {
                 "Authorization": sessionStorage.getItem("token")
             }
-        }).done((meeting, status, xhr) => {
-            console.log(meeting);
+        }).done((journal, status, xhr) => {
+            console.log(journal);
             this.setState({
-                meeting
+                journal
             });
         }).fail((xhr) => {
             if(xhr.status == 401)
@@ -126,21 +137,21 @@ class MeetingEditBox extends React.Component {
     _handleSubmit(e) {
         e.preventDefault();
 
-        let meetingId = this.props.match.params.meetingId;
+        let journalId = this.props.match.params.journalId;
 
-        let meeting = {
-            yesterday: this._yesterday.value,
-            today: this._today.value,
-            impediment: this._impediment.value
+        let journal = {
+            title: this._title.value,
+            entry: this._entry.value,
+            category: this._category.value
         }
 
         $.ajax({
             type: "PUT",
-            url: `/api/meeting/${meetingId}`,
+            url: `/api/journal/${journalId}`,
             headers: {
                 "Authorization": sessionStorage.getItem("token")
             },
-            data: meeting
+            data: journal
         }).done((data, status, xhr) => {
             this.setState({
                 done: true
@@ -154,7 +165,7 @@ class MeetingEditBox extends React.Component {
             }
         });
 
-        console.log(meeting);
+        console.log(journal);
 
     }
 
@@ -171,11 +182,11 @@ class MeetingEditBox extends React.Component {
     }
 }
 
-class MeetingNewBox extends React.Component {
+class JournalNewBox extends React.Component {
 
     constructor() {
         super();
-        
+
         this.state = {
             done: false,
             auth: true
@@ -212,25 +223,28 @@ class MeetingNewBox extends React.Component {
                             <form onSubmit={this._handleSubmit.bind(this)}>
                                 <div className="modal-body">
                                     <div className="form-group">
-                                        <label htmlFor="name">Name</label>
-                                        <input type="text" ref={(input) => this._name = input} className="form-control" id="name" />
+                                        <label htmlFor="title">Title</label>
+                                        <input type="text" ref={(input) => this._title = input} className="form-control" id="title" />
                                     </div>
+
                                     <div className="form-group">
-                                        <label htmlFor="project">Project</label>
-                                        <input type="text" ref={(input) => this._project = input} className="form-control" id="project" />
+                                        <label htmlFor="entry">Entry</label>
+                                        <textarea ref={(textarea) => this._entry = textarea} className="form-control" id="entry" rows="3"></textarea>
                                     </div>
+
                                     <div className="form-group">
-                                        <label htmlFor="yesterday">Yesterday</label>
-                                        <textarea ref={(textarea) => this._yesterday = textarea} className="form-control" id="yesterday" rows="3"></textarea>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="today">Today</label>
-                                        <textarea ref={(textarea) => this._today = textarea} className="form-control" id="today" rows="3"></textarea>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="impediment">Impediment</label>
-                                        <textarea ref={(textarea) => this._impediment = textarea} className="form-control" id="impediment" rows="3"></textarea>
-                                    </div>
+                                      <label htmlFor="category">Category</label>
+                                      <select className="form-control " id="category" name="category"
+                                        ref={(select) => this._category = select}>
+                                          <option value="Thoughts">Thoughts</option>
+                                          <option value="Travel">Travel</option>
+                                          <option value="School">School</option>
+                                          <option value="Love">Love</option>
+                                          <option value="Friends">Friends</option>
+                                          <option value="Notes">Notes</option>
+                                          <option value="Others">Others</option>
+                                      </select>
+                                  </div>
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" onClick={this._handleClose.bind(this)} className="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -253,22 +267,20 @@ class MeetingNewBox extends React.Component {
     _handleSubmit(e) {
         e.preventDefault();
 
-        let meeting = {
-            name: this._name.value,
-            project: this._project.value,
-            yesterday: this._yesterday.value,
-            today: this._today.value,
-            impediment: this._impediment.value
+        let journal = {
+            title: this._title.value,
+            entry: this._entry.value,
+            category: this._category.value
         }
 
         $.ajax({
             type: "POST",
-            url: "/api/meeting",
+            url: "/api/journal",
             headers: {
                 "Authorization": sessionStorage.getItem("token")
             },
-            data: meeting
-        }).done((meeting, status, xhr) => {
+            data: journal
+        }).done((journal, status, xhr) => {
             this._close();
         }).fail((xhr) => {
             console.log(xhr.status);

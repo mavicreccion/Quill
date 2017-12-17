@@ -1,10 +1,10 @@
-class ScrumBox extends React.Component {
+class QuillBox extends React.Component {
 
     constructor() {
         super();
 
         this.state = {
-            meetings: [],
+            journals: [],
             editMode: false,
             auth: true
         }
@@ -14,13 +14,13 @@ class ScrumBox extends React.Component {
 
         $.ajax({
             type: "GET",
-            url: "/api/meeting",
+            url: "/api/journal",
             headers: {
                 "Authorization": sessionStorage.getItem("token")
             }
-        }).done((meetings, status, xhr) => {
-            this.setState({ meetings });
-            console.log(meetings);
+        }).done((journals, status, xhr) => {
+            this.setState({ journals });
+            console.log(journals);
         }).fail((xhr) => {
             console.log(xhr.status);
 
@@ -47,7 +47,7 @@ class ScrumBox extends React.Component {
 
         if(this.state.editMode) {
             return (
-                <Redirect to="/meeting/new" />
+                <Redirect to="/journal/new" />
             );
         }
 
@@ -64,8 +64,8 @@ class ScrumBox extends React.Component {
         <div className="row">
             <div className="col-sm">
                 <div className="card-deck">
-                    <MeetingList meetings={this.state.meetings} />
-                </div> 
+                    <JournalList journals={this.state.journals} />
+                </div>
             </div>
         </div>
 </div>
@@ -81,30 +81,29 @@ class ScrumBox extends React.Component {
     }
 }
 
-class MeetingList extends React.Component {
+class JournalList extends React.Component {
 
     render() {
-        let meetings = this._getMeetings();
+        let journals = this._getJournals();
 
         return(
-            meetings.map((meeting) => 
-                    <MeetingCard 
-                        key={meeting._id}
-                        meetingId={meeting._id}
-                        name={meeting.name}
-                        yesterday={meeting.yesterday}
-                        today={meeting.today}
-                        impediment={meeting.impediment} />
+            journals.map((journal) =>
+                    <JournalCard
+                        key={journal._id}
+                        journalId={journal._id}
+                        title={journal.title}
+                        entry={journal.entry}
+                        category={journal.category} />
                 )
         );
     }
 
-    _getMeetings() {
-        return this.props.meetings;
+    _getJournals() {
+        return this.props.journals;
     }
 }
 
-class MeetingCard extends React.Component {
+class JournalCard extends React.Component {
 
     constructor() {
         super();
@@ -119,12 +118,12 @@ class MeetingCard extends React.Component {
 
         if(this.state.edit != "") {
             return (
-                <Redirect to={`/meetings/${this.state.edit}`} />
+                <Redirect to={`/journals/${this.state.edit}`} />
             );
         }
 
         if(this.state.refresh) {
-            return (                
+            return (
                 <Redirect to="/" />
             );
         }
@@ -132,34 +131,32 @@ class MeetingCard extends React.Component {
         return(
                     <div className="card">
                         <div className="card-body">
-                            <h4 className="card-title">{this.props.name}</h4>
-                            <h6 className="card-subtitle mb-2 text-muted">Yesterday</h6>
-                            <p className="card-text">{this.props.yesterday}</p>
-                            <h6 className="card-subtitle mb-2 text-muted">Today</h6>
-                            <p className="card-text">{this.props.today}</p>
-                            <h6 className="card-subtitle mb-2 text-muted">Impediments</h6>
-                            <p className="card-text">{this.props.impediment}</p>
-                            <ManageButton meetingId={this.props.meetingId} action={this._handleEdit.bind(this)} text="Edit" />
-                            <ManageButton meetingId={this.props.meetingId} action={this._handleDelete.bind(this)} text="Delete" />
+                            <h4 className="card-title">{this.props.title}</h4>
+                            <h6 className="card-subtitle mb-2 text-muted">Entry</h6>
+                            <p className="card-text">{this.props.entry}</p>
+                            <h6 className="card-subtitle mb-2 text-muted">Category</h6>
+                            <p className="card-text">{this.props.category}</p>
+                            <ManageButton journalId={this.props.journalId} action={this._handleEdit.bind(this)} text="Edit" />
+                            <ManageButton journalId={this.props.journalId} action={this._handleDelete.bind(this)} text="Delete" />
                         </div>
                     </div>
         );
     }
 
-    _handleEdit(meetingId) {
-        console.log(meetingId);
+    _handleEdit(journalId) {
+        console.log(journalId);
 
         this.setState({
-            edit: meetingId
+            edit: journalId
         });
     }
 
-    _handleDelete(meetingId) {
-        console.log(meetingId);
+    _handleDelete(journalId) {
+        console.log(journalId);
 
         $.ajax({
             type: "DELETE",
-            url: `/api/meeting/${meetingId}`,
+            url: `/api/journal/${journalId}`,
             headers: {
                 "Authorization": sessionStorage.getItem("token")
             }
@@ -188,7 +185,7 @@ class ManageButton extends React.Component {
 
     _handleEdit(e) {
         e.preventDefault();
-        this.props.action(this.props.meetingId);
+        this.props.action(this.props.journalId);
     }
 
 }
