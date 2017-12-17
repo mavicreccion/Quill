@@ -74,12 +74,11 @@ exports.filter = function(req, res) {
     Journal.find(query, function(err, result) {
         console.log("Finding");
         console.log(result);
-        if(!err) {
-            console.log("Result" + result);
-            res.status(204).send(result);
+        if(err) {
+            console.log(err);
+            return res.status(500).send();
         } else {
-
-            res.status(500).send();
+            return res.status(200).send(result);
         }
     });
 }
