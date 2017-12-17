@@ -14,7 +14,7 @@ class QuillBox extends React.Component {
 
         $.ajax({
             type: "GET",
-            url: "/api/journal",
+            url: `/api/journal/${sessionStorage.getItem("userId")}`,
             headers: {
                 "Authorization": sessionStorage.getItem("token")
             }
@@ -53,6 +53,25 @@ class QuillBox extends React.Component {
 
         return (
           <div>
+            <header>
+              <nav className="navbar navbar-expand-md navbar-dark fixed-top">
+                <a className="navbar-brand" href="#">Quill</a>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                  aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                  <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarCollapse">
+                  <ul className="navbar-nav ml-auto">
+                    <li className="nav-item active">
+                      <a className="nav-link" href="#">Journal <span className="sr-only">(current)</span></a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" href="#">{sessionStorage.getItem("name")}</a>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+            </header>
             <div className="container-fluid">
                 <div className="btn-group mb-3">
                     <button type="button" id = "addEntry" onClick={this._handleClick.bind(this)} className="btn btn-warning btn-fab pmd-btn-fab pmd-btn-raised ">
@@ -99,7 +118,7 @@ class QuillBox extends React.Component {
       console.log("FILTER " + this._category.value);
         $.ajax({
             type: "GET",
-            url: `/api/filterJournal/${this._category.value}`,
+            url: `/api/filterJournal/${sessionStorage.getItem("userId")}/${this._category.value}`,
             headers: {
                 "Authorization": sessionStorage.getItem("token")
             }

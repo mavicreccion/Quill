@@ -61,7 +61,7 @@ class LoginBox extends React.Component {
                             <input type="password" className="form-control" name="password" ref={(input) => this._password = input} placeholder="Enter password"/>
                           </div>
                           <hr></hr>
-                          <button type="submit" className="btn btn-primary btn-block mt-3">Create Account</button>
+                          <button type="submit" className="btn btn-primary btn-block mt-3">Login Account</button>
                         </form>
                       </div>
                     </div>
@@ -80,17 +80,16 @@ class LoginBox extends React.Component {
             name: this._name.value,
             password: this._password.value
         }
-        var currUser;
         $.ajax({
             type: "GET",
             url: `/api/getUser/${this._name.value}`
         }).done((user, status, xhr) => {
-            console.log(user);
-            currUser = user;
+            console.log(user[0]._id);
+            sessionStorage.setItem("userId", user[0]._id);
+            sessionStorage.setItem("name", user[0].name);
         }).fail((xhr) => {
             console.log(xhr.status);
         });
-        console.log(currUser._id);
         $.ajax({
             type: "POST",
             url: "/api/session",

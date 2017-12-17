@@ -7,12 +7,41 @@ var admin = new User({
   password: "123"
 });
 
+var user1 = new User({
+  name: "ledeh@ganda.com",
+  password: "123"
+});
+
+var user2 = new User({
+  name: "madam@ganda.com",
+  password: "123"
+});
+
+
 admin.save(function(req, res, error) {
   if (error) {
     console.log(error);
     return;
   } else {
     console.log("Admin Created")
+  }
+});
+
+user1.save(function(req, res, error) {
+  if (error) {
+    console.log(error);
+    return;
+  } else {
+    console.log("Ledeh Created")
+  }
+});
+
+user2.save(function(req, res, error) {
+  if (error) {
+    console.log(error);
+    return;
+  } else {
+    console.log("Madam Created")
   }
 });
 

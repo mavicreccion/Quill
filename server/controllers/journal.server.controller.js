@@ -2,14 +2,18 @@ const Journal = require("../models/journal.server.model.js");
 
 exports.getAll = function(req, res) {
 
-    Journal.findAll()
-        .then((journals) => {
-            return res.status(200).json(journals);
-        })
-        .catch((error) => {
-            console.log(error);
-            return res.status(400).send();
-        });
+    var query = {userId: req.params.userId};
+
+    Journal.find(query, function(err, result) {
+        console.log("Finding");
+        console.log(result);
+        if(err) {
+            console.log(err);
+            return res.status(500).send();
+        } else {
+            return res.status(200).send(result);
+        }
+    });
 }
 
 exports.getById = function(req, res) {
@@ -69,8 +73,7 @@ exports.update = function(req, res) {
 exports.filter = function(req, res) {
     console.log("Filtering");
     console.log(req.params.category);
-    var query = {category: req.params.category};
-    console.log({_category: req.params.category} + query);
+    var query = {userId: req.params.userId, category: req.params.category};
     Journal.find(query, function(err, result) {
         console.log("Finding");
         console.log(result);
