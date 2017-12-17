@@ -17,3 +17,20 @@ exports.register = (req, res) => {
         }
     });
 }
+
+exports.getUser = function(req, res) {
+    console.log("Getting User");
+    console.log(req.params.category);
+    var query = {name: req.params.name};
+    console.log({_category: req.params.category} + query);
+    User.find(query, function(err, result) {
+        console.log("Finding");
+        console.log(result);
+        if(err) {
+            console.log(err);
+            return res.status(500).send();
+        } else {
+            return res.status(200).send(result);
+        }
+    });
+}

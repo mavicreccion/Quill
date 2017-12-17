@@ -16,4 +16,6 @@ router.post("/journal", auth.check, journalCtrl.create);
 router.put("/journal/:journalId", auth.check, journalCtrl.update);
 router.delete("/journal/:journalId", auth.check, journalCtrl.delete);
 
+router.get("/getUser", accountCtrl.getUser);
+
 module.exports = router;
