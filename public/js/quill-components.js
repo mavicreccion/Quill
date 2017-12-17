@@ -125,7 +125,7 @@ class QuillBox extends React.Component {
       console.log("FILTER " + this._category.value);
         $.ajax({
             type: "GET",
-            url: `/api/journal/${category}`,
+            url: `/api/journal/${this._category.value}`,
             headers: {
                 "Authorization": sessionStorage.getItem("token")
             }
