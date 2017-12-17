@@ -12,10 +12,10 @@ class AppBox extends React.Component {
         return (
         <Router>
           <div>
-              
               <div id="content">
                   <Route exact path="/journal/new" component={JournalNew} />
                   <Route exact path="/session/new" component={LoginBox} />
+                  <Route exact path="/account/register" component={RegisterBox} />
                   <Route exact path="/journals/:journalId" component={JournalEditBox} />
                   <Route exact path="/" component={QuillBox} />
               </div>
@@ -31,6 +31,7 @@ class AppBox extends React.Component {
     }
 }
 const Login = () => <LoginBox />
+const Register = () => <RegisterBox />
 const Home = () => <QuillBox />
 const JournalNew = () => <JournalNewBox />
 const JournalEdit = () => <JournalEditBox />
