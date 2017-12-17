@@ -22,7 +22,7 @@ exports.getUser = function(req, res) {
     console.log("Getting User");
     console.log(req.params.category);
     var query = {name: req.params.name};
-    console.log({_category: req.params.category} + query);
+    console.log({name: req.params.name} + query);
     User.find(query, function(err, result) {
         console.log("Finding");
         console.log(result);
