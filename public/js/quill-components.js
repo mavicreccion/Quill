@@ -11,10 +11,9 @@ class QuillBox extends React.Component {
     }
 
     componentWillMount() {
-
         $.ajax({
             type: "GET",
-            url: "/api/journal",
+            url: `/api/journal/${sessionStorage.getItem("userId")}`,
             headers: {
                 "Authorization": sessionStorage.getItem("token")
             }
@@ -127,7 +126,7 @@ class QuillBox extends React.Component {
       console.log("FILTER " + this._category.value);
         $.ajax({
             type: "GET",
-            url: `/api/filterJournal/${this._category.value}`,
+            url: `/api/filterJournal/${sessionStorage.getItem("userId")}/${this._category.value}`,
             headers: {
                 "Authorization": sessionStorage.getItem("token")
             }

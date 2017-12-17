@@ -6,7 +6,8 @@ mongoose.Promise = global.Promise;
 let journalSchema = new Schema({
     title: String,
     entry: String,
-    category: String
+    category: String,
+    userId: String
 });
 
 journalSchema.statics = {

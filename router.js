@@ -9,9 +9,9 @@ let router = express.Router();
 router.post("/session", sessionCtrl.create);
 router.post("/account/register", accountCtrl.register);
 
-router.get("/journal", auth.check, journalCtrl.getAll);
+router.get("/journal/:userId", auth.check, journalCtrl.getAll);
 router.get("/journal/:journalId", auth.check, journalCtrl.getById);
-router.get("/filterJournal/:category", auth.check, journalCtrl.filter);
+router.get("/filterJournal/:userId/:category", auth.check, journalCtrl.filter);
 router.post("/journal", auth.check, journalCtrl.create);
 router.put("/journal/:journalId", auth.check, journalCtrl.update);
 router.delete("/journal/:journalId", auth.check, journalCtrl.delete);

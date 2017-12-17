@@ -322,7 +322,8 @@ class JournalNewBox extends React.Component {
         let journal = {
             title: this._title.value,
             entry: this._entry.value,
-            category: this._category.value
+            category: this._category.value,
+            userId: sessionStorage.getItem("userId")
         }
 
         $.ajax({
